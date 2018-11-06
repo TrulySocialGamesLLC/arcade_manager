@@ -11,25 +11,10 @@ require "fileutils"
 require "open3"
 
 repos = {
-  "pgr_server"          => {
+  "arcade" => {
     image: "planetgr/gold-rush-app",
     dockerfile: "config/dockerfiles/app/Dockerfile"
   },
-
-  "tournaments_server"  => {
-    image: "planetgr/gold-rush-tournaments",
-    dockerfile: "config/dockerfiles/app/Dockerfile"
-  },
-
-  "login_server"        => { 
-    image: "planetgr/gold-rush-login",
-    dockerfile: "docker/Dockerfile"
-  },
-
-  'status_server'        => {
-    image: 'planetgr/gold-rush-status',
-    dockerfile: 'config/dockerfiles/app/Dockerfile'
-  }
 }
 
 namespace :build do
@@ -74,9 +59,9 @@ namespace :build do
     image_name = repos[ service ][ :image ] + ":" + tag
 
     puts "Building \"#{service}\" Docker image as \"#{ image_name }\"".hl( :green )
-    # branch, stdout, stderr = Open3.capture3('git symbolic-ref --short -q HEAD')
-    # execute_command "docker build --build-arg CLONE_BRANCH=#{branch.strip} -f #{ repos[ service ][ :dockerfile ] } -t #{ image_name } ."
-    execute_command "docker build -f #{ repos[ service ][ :dockerfile ] } -t #{ image_name } ."
+    branch, stdout, stderr = Open3.capture3('git symbolic-ref --short -q HEAD')
+    execute_command "docker build --build-arg CLONE_BRANCH=#{branch.strip} -f #{ repos[ service ][ :dockerfile ] } -t #{ image_name } ."
+    # execute_command "docker build -f #{ repos[ service ][ :dockerfile ] } -t #{ image_name } ."
 
     puts "Pushing \"#{ image_name }\" image into registry".hl( :green )
     execute_command "docker push #{ image_name }"
