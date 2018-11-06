@@ -1,0 +1,25 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    colors (0.0.7)
+    hashie (3.5.6)
+    json (2.1.0)
+    net-ssh (5.0.2)
+    nissh (1.0.1)
+      net-ssh (>= 2)
+    oj (3.3.8)
+    rake (12.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  colors
+  hashie
+  json
+  nissh
+  oj
+  rake
+
+BUNDLED WITH
+   1.16.2
