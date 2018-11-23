@@ -16,6 +16,11 @@ repos = {
     dockerfile: 'config/dockerfiles/app/Dockerfile',
     command: proc { |tag| "mix build #{tag ? tag : ''}" },
   },
+  'challenge' => {
+    image: 'planetgr/challenge',
+    dockerfile: 'config/dockerfiles/app/Dockerfile',
+    command: proc { |tag| "mix build #{tag ? tag : ''}" },
+  },
 }
 
 namespace :build do
